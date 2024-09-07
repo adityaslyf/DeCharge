@@ -1,18 +1,26 @@
 import React from 'react';
 
-const SectionTitle = ({ children }) => (
+interface SectionTitleProps {
+  children: React.ReactNode;
+}
+
+const SectionTitle: React.FC<SectionTitleProps> = ({ children }) => (
   <h2 className="text-[#d9fcfd] text-2xl sm:text-3xl md:text-4xl font-bold font-['Inter']">
     {children}
   </h2>
 );
 
-const SectionText = ({ children }) => (
+interface SectionTextProps {
+  children: React.ReactNode;
+}
+
+const SectionText: React.FC<SectionTextProps> = ({ children }) => (
   <p className="text-[#ecfdfe] text-base sm:text-lg md:text-xl font-normal font-['Inter'] leading-relaxed">
     {children}
   </p>
 );
 
-const ImagePlaceholder = () => (
+const ImagePlaceholder: React.FC = () => (
   <div className="w-full md:w-1/2 lg:w-96 h-64 md:h-80 lg:h-96 bg-[#d9d9d9] aspect-video">
     <img 
       src="/api/placeholder/600/400" 
@@ -22,7 +30,13 @@ const ImagePlaceholder = () => (
   </div>
 );
 
-const ContentSection = ({ title, text, imageFirst = false }) => (
+interface ContentSectionProps {
+  title: string;
+  text: string;
+  imageFirst?: boolean;
+}
+
+const ContentSection: React.FC<ContentSectionProps> = ({ title, text, imageFirst = false }) => (
   <div className={`flex flex-col ${imageFirst ? 'md:flex-row-reverse' : 'md:flex-row'} justify-between items-center gap-8`}>
     <ImagePlaceholder />
     <div className="flex flex-col gap-4 w-full md:w-1/2">
@@ -32,7 +46,7 @@ const ContentSection = ({ title, text, imageFirst = false }) => (
   </div>
 );
 
-const Page = () => {
+const Page: React.FC = () => {
   return (
     <div className="p-4 sm:p-6 space-y-12 bg-black text-white">
       <header className="space-y-4">
