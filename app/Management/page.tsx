@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface SectionTitleProps {
   children: React.ReactNode;
@@ -22,10 +23,13 @@ const SectionText: React.FC<SectionTextProps> = ({ children }) => (
 
 const ImagePlaceholder: React.FC = () => (
   <div className="w-full md:w-1/2 lg:w-96 h-64 md:h-80 lg:h-96 bg-[#d9d9d9] aspect-video">
-    <img 
+    <Image 
       src="/api/placeholder/600/400" 
       alt="DeCharge Mini EV charge point" 
-      className="w-full h-full object-cover"
+      width={600}
+      height={400}
+      layout="responsive"
+      objectFit="cover"
     />
   </div>
 );
@@ -52,7 +56,7 @@ const Page: React.FC = () => {
       <header className="space-y-4">
         <SectionTitle>Deploy Effortlessly with DeCharge</SectionTitle>
         <SectionText>
-          Simply choose the number of DeCharge Mini EV charge points you'd like to deploy, and let DeCharge handle everything else.
+          Simply choose the number of DeCharge Mini EV charge points you&apos;d like to deploy, and let DeCharge handle everything else.
         </SectionText>
       </header>
 
@@ -63,7 +67,7 @@ const Page: React.FC = () => {
 
       <ContentSection 
         title="Earn while supporting a sustainable future."
-        text="Each time a vehicle charges at a DeCharge Mini, you earn a share of the fees, boosting your income while supporting global sustainability. Transparent monthly payouts & the option to expand make it easy to track earnings & scale your impact by deploying more chargers to meet the growing demand for EV infrastructure."
+        text="Each time a vehicle charges at a DeCharge Mini, you earn a share of the fees, boosting your income while supporting global sustainability. Transparent monthly payouts &amp; the option to expand make it easy to track earnings &amp; scale your impact by deploying more chargers to meet the growing demand for EV infrastructure."
         imageFirst={true}
       />
     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Image from 'next/image';
 const FEATURE_LIST: string[] = [
     'Manage Deployments',
     'Monthly Earning',
@@ -45,10 +45,12 @@ const Page: React.FC = () => {
                 <Button>Get Started</Button>
             </div>
             <div className="w-full md:w-1/2 max-w-md">
-                <img
+                <Image
                     src="/Rectangle 243.png"
-                    className="w-full h-auto object-cover rounded-lg shadow-lg"
+                    className=" object-cover rounded-lg shadow-lg"
                     alt="EV Charger Illustration"
+                    width={600}
+                    height={600}
                 />
             </div>
         </div>
