@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 const navItems = [
   { name: 'Proposal', href: '#' },
@@ -19,9 +20,11 @@ const Navbar: React.FC = () => {
   };
 
   const ConnectWalletButton: React.FC = () => (
-    <button className="px-3 py-1 sm:px-4 sm:py-2 rounded-xl border border-solid border-black bg-gradient-to-b from-pink-300 to-pink-500 text-white transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-300">
-      <span className="text-sm sm:text-lg font-normal">Connect Wallet</span>
-    </button>
+
+    <WalletMultiButton
+      className="px-3 py-1 sm:px-4 sm:py-2 rounded-xl border border-solid border-black bg-gradient-to-b from-pink-300 to-pink-500 text-white transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-300 text-sm sm:text-lg font-normal"
+    />
+
   );
 
   return (
@@ -39,8 +42,8 @@ const Navbar: React.FC = () => {
           </div>
           <div className="hidden sm:flex gap-4 sm:gap-6 font-normal text-base sm:text-lg items-center text-white">
             {navItems.map((item) => (
-              <a 
-                key={item.name} 
+              <a
+                key={item.name}
                 href={item.href}
                 className="hover:text-pink-300 transition-colors"
               >
@@ -65,8 +68,8 @@ const Navbar: React.FC = () => {
         <div className="sm:hidden mt-4">
           <div className="flex flex-col gap-4 font-normal text-lg text-white">
             {navItems.map((item) => (
-              <a 
-                key={item.name} 
+              <a
+                key={item.name}
                 href={item.href}
                 className="hover:text-pink-300 transition-colors"
               >
