@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { CiCircleMinus, CiCirclePlus } from 'react-icons/ci';
 import Navbar from '../Navbar/page';
 
@@ -18,7 +19,7 @@ const ProductPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 space-y-6 text-cyan-50">
+    <div className="container mx-auto p-4 space-y-6 text-cyan-50 ">
       <Navbar />
       <div className="flex flex-col lg:flex-row gap-8">
         <ProductGallery />
@@ -97,20 +98,23 @@ const ProductDetails: React.FC<ProductInfoProps> = ({ quantity, price, onQuantit
   const totalPrice = price * quantity;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">DeCharge Mini</h1>
         <p className="text-lg">Avl : 55/200</p>
       </div>
       <p className="text-xl font-semibold">${price}</p>
+      
       <QuantitySelector 
         quantity={quantity} 
         onQuantityChange={onQuantityChange} 
         totalPrice={totalPrice} 
       />
-      <button className="w-full py-3 rounded-xl border border-black bg-gradient-to-b from-cyan-200 to-cyan-400 text-black font-semibold transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-300">
+      <Link href="/CheckoutPayment">
+      <button className="w-full py-3 mt-4 rounded-xl border border-black bg-gradient-to-b from-cyan-200 to-cyan-400 text-black font-semibold transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-300">
         Checkout - ${totalPrice}
       </button>
+      </Link>
     </div>
   );
 };
@@ -122,7 +126,7 @@ interface QuantitySelectorProps {
 }
 
 const QuantitySelector: React.FC<QuantitySelectorProps> = ({ quantity, onQuantityChange, totalPrice }) => (
-  <div className="space-y-2">
+  <div className="space-y-4">
     <p>Select Quantity</p>
     <div className="flex justify-between items-center">
       <div className="flex gap-4 items-center">

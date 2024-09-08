@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+
 const FEATURE_LIST: string[] = [
     'Manage Deployments',
     'Monthly Earning',
@@ -42,7 +44,10 @@ const Page: React.FC = () => {
                     Deploy a DeCharge Mini, Earn extra Cash
                 </p>
                 <FeatureList features={FEATURE_LIST} />
-                <Button>Get Started</Button>
+                <Link href="/Checkout">
+                    <Button>Get Started</Button>
+                </Link>
+
             </div>
             <div className="w-full md:w-1/2 max-w-md">
                 <Image

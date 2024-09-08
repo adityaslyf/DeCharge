@@ -32,7 +32,7 @@ const MacbookPro: React.FC = (): JSX.Element => {
   return (
     <div className="container mx-auto">
       <Navbar />
-      <div className="p-6 md:p-10 text-white flex justify-center items-center">
+      <div className="p-6 md:p-10 text-white flex justify-center items-center ">
         <div className="flex flex-col gap-6 w-full max-w-5xl space-y-8">
           <div className="w-full border p-6 space-y-4">
             <h2 className="font-bold text-2xl md:text-3xl text-center">

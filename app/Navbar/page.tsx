@@ -28,11 +28,11 @@ const Navbar: React.FC = () => {
     <nav className="p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4 sm:gap-8">
-          <div className="w-24 flex items-center">
+          <div className=" flex items-center">
             <Image
               src="/Logo_02 (1) 1.png"
-              width={96}
-              height={48}
+              width={125}
+              height={68}
               className="object-contain"
               alt="DeCharge Logo"
             />
