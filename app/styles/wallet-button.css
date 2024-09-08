@@ -1,0 +1,15 @@
+.connect-wallet-btn {
+    background: linear-gradient(to bottom, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%) !important;
+    border: none !important;
+    color: white !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+  }
+  
+  .connect-wallet-btn:hover {
+    background: linear-gradient(to bottom, #fad0c4 0%, #ff9a9e 99%, #ff9a9e 100%) !important;
+  }
+  
+  .connect-wallet-btn .wallet-adapter-button-start-icon {
+    display: none;
+  }
