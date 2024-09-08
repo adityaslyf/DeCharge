@@ -22,10 +22,8 @@ const Navbar: React.FC = () => {
   const ConnectWalletButton: React.FC = () => (
 
     <WalletMultiButton
-    className="connect-wallet-btn px-3 py-1 sm:px-4 sm:py-2 rounded-xl border border-solid border-black bg-gradient-to-b from-pink-300 to-pink-500 text-white transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-300 text-sm sm:text-lg font-normal"
-  >
-    Connect Wallet
-  </WalletMultiButton>
+      className="px-3 py-1 sm:px-4 sm:py-2 rounded-xl border border-solid border-black bg-gradient-to-b from-pink-300 to-pink-500 text-white transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-300 text-sm sm:text-lg font-normal"
+    />
 
   );
 
