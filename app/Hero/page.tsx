@@ -45,7 +45,7 @@ const Page: React.FC = () => {
                 </p>
                 <FeatureList features={FEATURE_LIST} />
                 <Link href="/Checkout">
-                    <Button>Get Started</Button>
+                    <Button className='mt-4'>Get Started</Button>
                 </Link>
 
             </div>

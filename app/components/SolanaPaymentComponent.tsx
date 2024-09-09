@@ -11,7 +11,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, disabled, children, className,
   <button
     onClick={onClick}
     disabled={disabled}
-    className={`px-4 py-2 bg-gradient-to-b from-pink-300 to-pink-500 text-white rounded-xl transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-300 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+    className={`px-4 py-2 bg-gradient-to-b from-[#b3f9fc] to-[#33d9df] text-[#003e45] text-xl rounded-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-300 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     {...props}
   >
     {children}
@@ -85,7 +85,7 @@ const SolanaPaymentComponent: React.FC<SolanaPaymentComponentProps> = ({ amount,
       <Button
         onClick={handlePayment}
         disabled={isPaying || !publicKey}
-        className='w-full'
+        className='w-full '
     
       >
         {isPaying ? 'Processing...' : 'Pay Now'}
