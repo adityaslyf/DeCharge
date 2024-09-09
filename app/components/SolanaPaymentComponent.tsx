@@ -85,6 +85,8 @@ const SolanaPaymentComponent: React.FC<SolanaPaymentComponentProps> = ({ amount,
       <Button
         onClick={handlePayment}
         disabled={isPaying || !publicKey}
+        className='w-full'
+    
       >
         {isPaying ? 'Processing...' : 'Pay Now'}
       </Button>

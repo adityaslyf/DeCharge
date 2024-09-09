@@ -1,38 +1,60 @@
 "use client";
 import React, { useState } from "react";
 import Navbar from "../Navbar/page";
-import PaymentSuccessDialog from "../Success/dialog"; // Import the PaymentSuccessDialog component
+import { useSearchParams } from 'next/navigation';
+import SolanaPaymentComponent from "../components/SolanaPaymentComponent"; // Ensure the correct path to SolanaPaymentComponent
+import { Suspense } from 'react';
 
-const MacbookPro: React.FC = (): JSX.Element => {
-  const [quantity, setQuantity] = useState<number>(2); // State to manage quantity
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false); // State to control dialog visibility
-  const pricePerUnit = 100; // Price per item
-  const solToUsdRate = 1.5; // Conversion rate (example value)
-  const totalPrice = quantity * pricePerUnit;
-  const totalSOL = (totalPrice / solToUsdRate).toFixed(2);
+interface CompleteContent {}
 
-  const handleDecrement = () => {
+
+
+const CompletePayment: React.FC = () =>{
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CompleteContent />
+    </Suspense>
+  );
+}
+
+
+
+const CompleteContent: React.FC<CompleteContent> = (): JSX.Element => {
+  const searchParams = useSearchParams();
+  const price = searchParams.get('price');
+  const quantityParam = searchParams.get('quantity');
+
+  const pricePerUnit: number = parseFloat(price || '100'); // Default price per item
+  const initialQuantity: number = parseInt(quantityParam || '2'); // Default quantity if parsing fails
+
+  const [quantity, setQuantity] = useState<number>(initialQuantity); // State to manage quantity
+//   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false); // State to control dialog visibility
+  const solToUsdRate: number = 109.5; // Conversion rate (example value)
+  const totalPrice: number = quantity * pricePerUnit;
+  const totalSOL: string = (totalPrice / solToUsdRate).toFixed(2);
+
+  const handleDecrement = (): void => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
 
-  const handleIncrement = () => {
+  const handleIncrement = (): void => {
     setQuantity(quantity + 1);
   };
 
-  const handlePayNow = () => {
-    setIsDialogOpen(true); // Open the dialog when the "Pay Now" button is clicked
-  };
+//   const handlePayNow = (): void => {
+//     setIsDialogOpen(true); // Open the dialog when the "Pay Now" button is clicked
+//   };
 
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false); // Close the dialog
-  };
+//   const handleCloseDialog = (): void => {
+//     setIsDialogOpen(false); // Close the dialog
+//   };
 
   return (
     <div className="container mx-auto">
       <Navbar />
-      <div className="p-6 md:p-10 text-white flex justify-center items-center ">
+      <div className="p-6 md:p-10 text-white flex justify-center items-center">
         <div className="flex flex-col gap-6 w-full max-w-5xl space-y-8">
           <div className="w-full border p-6 space-y-4">
             <h2 className="font-bold text-2xl md:text-3xl text-center">
@@ -62,7 +84,7 @@ const MacbookPro: React.FC = (): JSX.Element => {
             </div>
             <div className="flex justify-between mb-4">
               <span className="text-xl">Amount</span>
-              <span className="text-xl">${totalPrice}</span>
+              <span className="text-xl">${totalPrice.toFixed(2)}</span>
             </div>
             <div className="flex justify-between mb-4">
               <span className="text-xl">Payment token</span>
@@ -85,21 +107,20 @@ const MacbookPro: React.FC = (): JSX.Element => {
                 <span className="text-xl">{totalSOL} SOL</span>
               </div>
               <hr />
-              <button
-                className="w-full py-3 mt-6 bg-gradient-to-b from-cyan-300 to-cyan-500 rounded-lg font-normal text-primary-900 text-xl text-center"
-                onClick={handlePayNow}
-              >
-                Pay Now
-              </button>
+              <SolanaPaymentComponent
+                amount={parseFloat(totalSOL)} // Pass the total amount in SOL
+                recipientAddress="EoL8JTd3rx5kBZ1ayhu5f6q7tsNLcLnwbdJdvXJXf9xy" // Replace with the actual recipient address
+                
+              />
             </div>
           </div>
         </div>
       </div>
 
       {/* Render PaymentSuccessDialog when isDialogOpen is true */}
-      {isDialogOpen && <PaymentSuccessDialog onClose={handleCloseDialog} />}
+      {/* {isDialogOpen && <PaymentSuccessDialog onClose={handleCloseDialog} />} */}
     </div>
   );
 };
 
-export default MacbookPro;
+export default CompletePayment;

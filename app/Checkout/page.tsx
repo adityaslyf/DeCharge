@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { CiCircleMinus, CiCirclePlus } from 'react-icons/ci';
-import Navbar from '../Navbar/page';
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import Navbar from "../Navbar/page";
+
 
 interface SpecListProps {
   title: string;
@@ -23,11 +24,7 @@ const ProductPage: React.FC = () => {
       <Navbar />
       <div className="flex flex-col lg:flex-row gap-8">
         <ProductGallery />
-        <ProductInfo 
-          quantity={quantity} 
-          price={price} 
-          onQuantityChange={handleQuantityChange} 
-        />
+        <ProductInfo quantity={quantity} price={price} onQuantityChange={handleQuantityChange} />
       </div>
     </div>
   );
@@ -84,11 +81,7 @@ interface ProductInfoProps {
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ quantity, price, onQuantityChange }) => (
   <div className="lg:w-1/2 space-y-6">
-    <ProductDetails 
-      quantity={quantity} 
-      price={price} 
-      onQuantityChange={onQuantityChange} 
-    />
+    <ProductDetails quantity={quantity} price={price} onQuantityChange={onQuantityChange} />
     <ProductDescription />
     <ProductSpecs />
   </div>
@@ -104,16 +97,12 @@ const ProductDetails: React.FC<ProductInfoProps> = ({ quantity, price, onQuantit
         <p className="text-lg">Avl : 55/200</p>
       </div>
       <p className="text-xl font-semibold">${price}</p>
-      
-      <QuantitySelector 
-        quantity={quantity} 
-        onQuantityChange={onQuantityChange} 
-        totalPrice={totalPrice} 
-      />
-      <Link href="/CheckoutPayment">
-      <button className="w-full py-3 mt-4 rounded-xl border border-black bg-gradient-to-b from-cyan-200 to-cyan-400 text-black font-semibold transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-300">
-        Checkout - ${totalPrice}
-      </button>
+
+      <QuantitySelector quantity={quantity} onQuantityChange={onQuantityChange} totalPrice={totalPrice} />
+      <Link href={`/CheckoutPayment?price=${price}&quantity=${quantity}`}>
+        <button className="w-full py-3 mt-4 rounded-xl border border-black bg-gradient-to-b from-cyan-200 to-cyan-400 text-black font-semibold transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-300">
+          Checkout - ${totalPrice}
+        </button>
       </Link>
     </div>
   );
@@ -130,19 +119,11 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({ quantity, onQuantit
     <p>Select Quantity</p>
     <div className="flex justify-between items-center">
       <div className="flex gap-4 items-center">
-        <button 
-          onClick={() => onQuantityChange(-1)} 
-          aria-label="Decrease quantity" 
-          className="focus:outline-none focus:ring-2 focus:ring-cyan-300 rounded-full"
-        >
+        <button onClick={() => onQuantityChange(-1)} aria-label="Decrease quantity" className="focus:outline-none focus:ring-2 focus:ring-cyan-300 rounded-full">
           <CiCircleMinus size={32} className="text-cyan-300 hover:text-cyan-400" />
         </button>
         <span className="text-lg">{quantity}</span>
-        <button 
-          onClick={() => onQuantityChange(1)} 
-          aria-label="Increase quantity" 
-          className="focus:outline-none focus:ring-2 focus:ring-cyan-300 rounded-full"
-        >
+        <button onClick={() => onQuantityChange(1)} aria-label="Increase quantity" className="focus:outline-none focus:ring-2 focus:ring-cyan-300 rounded-full">
           <CiCirclePlus size={32} className="text-cyan-300 hover:text-cyan-400" />
         </button>
       </div>
@@ -155,9 +136,7 @@ const ProductDescription: React.FC = () => (
   <div className="space-y-2">
     <h2 className="text-xl font-bold">Product Description</h2>
     <p className="text-base leading-relaxed">
-      The DeCharge Point is a smart, compact EV charger designed to offer effortless,
-      reliable charging for 2/3/4 wheeler EVs. Ideal for public &amp; private use, it ensures safety
-      and ease for all EV owners. Perfect for businesses, homes or cafes - almost anywhere!
+      The DeCharge Point is a smart, compact EV charger designed to offer effortless, reliable charging for 2/3/4 wheeler EVs. Ideal for public &amp; private use, it ensures safety and ease for all EV owners. Perfect for businesses, homes or cafes - almost anywhere!
     </p>
   </div>
 );
