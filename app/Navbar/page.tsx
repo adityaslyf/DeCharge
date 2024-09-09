@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import SolanaPaymentComponent from '../components/SolanaPaymentComponent';
 
 const navItems = [
   { name: 'Proposal', href: '#' },
@@ -20,10 +21,16 @@ const Navbar: React.FC = () => {
   };
 
   const ConnectWalletButton: React.FC = () => (
+    <div>
+      <WalletMultiButton
+        className="px-3 py-1 sm:px-4 sm:py-2 rounded-xl border border-solid border-black bg-gradient-to-b from-pink-300 to-pink-500 text-white transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-300 text-sm sm:text-lg font-normal"
+      />
+      <SolanaPaymentComponent
+        amount={1} // Amount in SOL
+        recipientAddress="EoL8JTd3rx5kBZ1ayhu5f6q7tsNLcLnwbdJdvXJXf9xy"
+      />
+    </div>
 
-    <WalletMultiButton
-      className="px-3 py-1 sm:px-4 sm:py-2 rounded-xl border border-solid border-black bg-gradient-to-b from-pink-300 to-pink-500 text-white transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-300 text-sm sm:text-lg font-normal"
-    />
 
   );
 
