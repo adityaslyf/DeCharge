@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/page";
 import { useSearchParams } from 'next/navigation';
-import SolanaPaymentComponent from "../components/SolanaPaymentComponent"; // Ensure the correct path to SolanaPaymentComponent
+import SolanaPaymentComponent from "../components/SolanaPaymentComponent"; 
 import { Suspense } from 'react';
 
+
 interface CompleteContent {}
-
-
 
 const CompletePayment: React.FC = () =>{
   return (
@@ -16,8 +15,6 @@ const CompletePayment: React.FC = () =>{
     </Suspense>
   );
 }
-
-
 
 const CompleteContent: React.FC<CompleteContent> = (): JSX.Element => {
   const searchParams = useSearchParams();
@@ -28,7 +25,6 @@ const CompleteContent: React.FC<CompleteContent> = (): JSX.Element => {
   const initialQuantity: number = parseInt(quantityParam || '2'); // Default quantity if parsing fails
 
   const [quantity, setQuantity] = useState<number>(initialQuantity); // State to manage quantity
-//   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false); // State to control dialog visibility
   const solToUsdRate: number = 109.5; // Conversion rate (example value)
   const totalPrice: number = quantity * pricePerUnit;
   const totalSOL: string = (totalPrice / solToUsdRate).toFixed(2);
@@ -43,13 +39,6 @@ const CompleteContent: React.FC<CompleteContent> = (): JSX.Element => {
     setQuantity(quantity + 1);
   };
 
-//   const handlePayNow = (): void => {
-//     setIsDialogOpen(true); // Open the dialog when the "Pay Now" button is clicked
-//   };
-
-//   const handleCloseDialog = (): void => {
-//     setIsDialogOpen(false); // Close the dialog
-//   };
 
   return (
     <div className="container mx-auto">
@@ -116,9 +105,6 @@ const CompleteContent: React.FC<CompleteContent> = (): JSX.Element => {
           </div>
         </div>
       </div>
-
-      {/* Render PaymentSuccessDialog when isDialogOpen is true */}
-      {/* {isDialogOpen && <PaymentSuccessDialog onClose={handleCloseDialog} />} */}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
+import PaymentSuccessDialog from '../Success/Dialog';
 
 // Custom Button component
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -38,10 +39,16 @@ interface PaymentStatus {
   message: string;
 }
 
+
 // Main component props
 interface SolanaPaymentComponentProps {
   amount: number;
   recipientAddress: string;
+}
+
+interface PaymentStatus {
+  type: 'error' | 'success';
+  message: string;
 }
 
 const SolanaPaymentComponent: React.FC<SolanaPaymentComponentProps> = ({ amount, recipientAddress }) => {
@@ -49,16 +56,15 @@ const SolanaPaymentComponent: React.FC<SolanaPaymentComponentProps> = ({ amount,
   const { publicKey, sendTransaction } = useWallet();
   const [isPaying, setIsPaying] = useState<boolean>(false);
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus | null>(null);
+  const [showSuccessDialog, setShowSuccessDialog] = useState<boolean>(false);
 
   const handlePayment = async () => {
     if (!publicKey) {
       setPaymentStatus({ type: 'error', message: 'Please connect your wallet first.' });
       return;
     }
-
     setIsPaying(true);
     setPaymentStatus(null);
-
     try {
       const transaction = new Transaction().add(
         SystemProgram.transfer({
@@ -67,11 +73,11 @@ const SolanaPaymentComponent: React.FC<SolanaPaymentComponentProps> = ({ amount,
           lamports: amount * LAMPORTS_PER_SOL,
         })
       );
- console.log(publicKey.toBase58());
+      console.log(publicKey.toBase58());
       const signature = await sendTransaction(transaction, connection);
       await connection.confirmTransaction(signature, 'processed');
-
       setPaymentStatus({ type: 'success', message: 'Payment successful!' });
+      setShowSuccessDialog(true);
     } catch (error) {
       console.error('Error:', error);
       setPaymentStatus({ type: 'error', message: 'Payment failed. Please try again.' });
@@ -80,22 +86,28 @@ const SolanaPaymentComponent: React.FC<SolanaPaymentComponentProps> = ({ amount,
     }
   };
 
+  const handleCloseSuccessDialog = () => {
+    setShowSuccessDialog(false);
+  };
+
   return (
     <div className="flex flex-col items-center gap-4">
       <Button
         onClick={handlePayment}
         disabled={isPaying || !publicKey}
-        className='w-full '
-    
+        className='w-full'
       >
         {isPaying ? 'Processing...' : 'Pay Now'}
       </Button>
-      {paymentStatus && (
+      {paymentStatus && !showSuccessDialog && (
         <Alert
           variant={paymentStatus.type}
           title={paymentStatus.type === 'error' ? 'Error' : 'Success'}
           description={paymentStatus.message}
         />
+      )}
+      {showSuccessDialog && (
+        <PaymentSuccessDialog onClose={handleCloseSuccessDialog} />
       )}
     </div>
   );

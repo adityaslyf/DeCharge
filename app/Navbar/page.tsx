@@ -1,9 +1,9 @@
 "use client";
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const navItems = [
   { name: 'Proposal', href: '#' },
@@ -14,27 +14,31 @@ const navItems = [
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { publicKey } = useWallet();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    if (publicKey) {
+      console.log("Connected wallet public key:", publicKey.toBase58());
+    }
+  }, [publicKey]);
 
   const ConnectWalletButton: React.FC = () => (
     <div>
       <WalletMultiButton
         className="px-3 py-1 sm:px-4 sm:py-2 rounded-xl border border-solid border-black bg-gradient-to-b from-pink-300 to-pink-500 text-white transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-300 text-sm sm:text-lg font-normal"
       />
-
     </div>
-
-
   );
 
   return (
     <nav className="p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4 sm:gap-8">
-          <div className=" flex items-center">
+          <div className="flex items-center">
             <Image
               src="/Logo_02 (1) 1.png"
               width={125}
@@ -82,6 +86,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       )}
+      
     </nav>
   );
 };

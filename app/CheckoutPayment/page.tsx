@@ -24,6 +24,19 @@ const CheckoutPage: React.FC = () => {
     </Suspense>
   );
 }
+const countries = [
+  'United States',
+  'Canada',
+  'United Kingdom',
+  'Germany',
+  'France',
+  'Japan',
+  'Australia',
+  'Brazil',
+  'India',
+  'China',
+  // Add more countries as needed
+];
 
 const CheckoutContent: React.FC = () => {
   const searchParams = useSearchParams();
@@ -58,7 +71,17 @@ const CheckoutContent: React.FC = () => {
           <div className="space-y-6 w-full">
             <h2 className="text-2xl font-bold">Contact Information</h2>
             <div className="space-y-4">
-              {['Country', 'Full Name', 'Enter your email'].map((placeholder) => (
+            <select
+                className="w-full p-4 rounded-lg bg-black border border-[#ecfdfe] text-white"
+              >
+                <option value="">Country</option>
+                {countries.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+              {[ 'Full Name', 'Enter your email'].map((placeholder) => (
                 <input
                   key={placeholder}
                   placeholder={placeholder}
